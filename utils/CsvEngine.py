@@ -1,4 +1,6 @@
 from setuptools import setup
+import os
+import pathlib
 
 
 class CsvEngine:
@@ -20,5 +22,11 @@ class CsvEngine:
 
     def createFile(self, path):
         f = open(path, "w")
-        f.write("test")
         f.close()
+
+    def deleteFile(self):
+        path = pathlib.Path(self.file)
+        if(path.is_file()):
+            os.remove(self.file)
+        else:
+            print('The file does not exist')
