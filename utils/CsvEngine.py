@@ -1,6 +1,7 @@
 from setuptools import setup
 import os
 import pathlib
+import csv
 
 
 class CsvEngine:
@@ -23,6 +24,29 @@ class CsvEngine:
     def createFile(self, path):
         f = open(path, "w")
         f.close()
+
+    def writeRow(self, content, choice):
+        if(int(choice) == 1):
+            self.file = self.data_filename
+        else:
+            self.file = self.test_filename
+
+        f = open(self.file, 'w', newline='')
+        writer = csv.writer(f)
+        writer.writerow(content)
+        f.close()
+
+
+    def readLines(self, choice):
+        if(int(choice) == 1):
+            self.file = self.data_filename
+        else:
+            self.file = self.test_filename
+
+        f = open(self.file, 'r')
+        reader = csv.reader(f)
+        return reader
+
 
     def deleteFile(self):
         path = pathlib.Path(self.file)
