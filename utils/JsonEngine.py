@@ -1,7 +1,3 @@
-import pathlib
-import os
-import json
-
 from utils.BaseEngine import BaseEngine
 
 class JsonEngine(BaseEngine):
@@ -10,7 +6,6 @@ class JsonEngine(BaseEngine):
         super().__init__()
         self.setDataFileName(dataNm) 
         self.setTestFileName(testNm)
-        print("{0}, {1}".format(dataNm, testNm))
     
     def createDocument(self, flType):
         self.setupTestFile(flType)

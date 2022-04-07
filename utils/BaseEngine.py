@@ -5,7 +5,7 @@ import json
 class BaseEngine:
     __data_filename = ""
     __test_filename = ""
-    file = ""
+    __file = ""
 
     def setDataFileName(self, flnm):
         self.__data_filename = flnm
@@ -19,13 +19,19 @@ class BaseEngine:
     def getTestFileName(self):
         return self.__test_filename
 
+    def setFileNm(self, newFlnm):
+        self.__file = newFlnm
+
+    def getFileNm(self):
+        return self.__file
+
     def setupTestFile(self, choice):
         if(int(choice) == 1):
-            self.file = self.__data_filename
+            self.__file = self.__data_filename
         else:
-            self.file = self.__test_filename
+            self.__file = self.__test_filename
         
-        self.createFile(self.file)
+        self.createFile(self.__file)
     
     def createFile(self, path):
         f = open(path, "w")
@@ -33,28 +39,28 @@ class BaseEngine:
 
     def writeRow(self, content, choice):
         if(int(choice) == 1):
-            self.file = self.__data_filename
+            self.__file = self.__data_filename
         else:
-            self.file = self.__test_filename
+            self.__file = self.__test_filename
 
-        f = open(self.file, 'w', newline='')
+        f = open(self.__file, 'w', newline='')
         json.dump(content ,f)
         f.close()
 
     def readLines(self, choice):
         if(int(choice) == 1):
-            self.file = self.__data_filename
+            self.__file = self.__data_filename
         else:
-            self.file = self.__test_filename
+            self.__file = self.__test_filename
 
-        f = open(self.file, 'r')
+        f = open(self.__file, 'r')
         reader = json.load(f)
         return reader
 
 
     def deleteFile(self):
-        path = pathlib.Path(self.file)
+        path = pathlib.Path(self.__file)
         if(path.is_file()):
-            os.remove(self.file)
+            os.remove(self.__file)
         else:
             print('The file does not exist')

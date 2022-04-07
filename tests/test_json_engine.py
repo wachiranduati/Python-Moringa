@@ -6,7 +6,6 @@ from utils.JsonEngine import JsonEngine
 class TestJson(unittest.TestCase):
     data = "data/dataset.json"
     test = "tests/data/dataset_test.json"
-    
     path = pathlib.Path("tests/data/dataset_test.json")
     x =  JsonEngine(data, test)
     data = [{"id":1,"first_name":"Yvor","last_name":"McNalley","email":"ymcnalley0@angelfire.com","gender":"Male","ip_address":"160.92.169.74"},

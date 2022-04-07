@@ -1,37 +1,30 @@
 from setuptools import setup
-import os
-import pathlib
 import csv
 
+from utils.BaseEngine import BaseEngine
 
-class CsvEngine:
+
+class CsvEngine(BaseEngine):
+
+    def __init__(self, dataNm, testNm) -> None:
+        super().__init__()
+        self.setDataFileName(dataNm) 
+        self.setTestFileName(testNm)
+
+    def createDocument(self, flType):
+        self.setupTestFile(flType)
     
-    data_filename = "data/dataset.csv"
-    test_filename = "tests/data/dataset_test.csv"
-    file = ""
-
-    # def __init__(self, option):
-    #     self.setupTestFile(option)
-
-    def setupTestFile(self, choice):
-        if(int(choice) == 1):
-            self.file = self.data_filename
-        else:
-            self.file = self.test_filename
-        
-        self.createFile(self.file)
-
-    def createFile(self, path):
-        f = open(path, "w")
-        f.close()
+    def destroyDocument(self):
+        self.deleteFile()
 
     def writeRow(self, content, choice):
         if(int(choice) == 1):
-            self.file = self.data_filename
+            self.setFileNm(self.getDataFileName())
         else:
-            self.file = self.test_filename
+            self.setFileNm(self.getTestFileName())
 
-        f = open(self.file, 'w', newline='')
+        
+        f = open(self.getFileNm(), 'w', newline='')
         writer = csv.writer(f)
         writer.writerow(content)
         f.close()
@@ -39,18 +32,10 @@ class CsvEngine:
 
     def readLines(self, choice):
         if(int(choice) == 1):
-            self.file = self.data_filename
+            self.setFileNm(self.getDataFileName())
         else:
-            self.file = self.test_filename
+            self.setFileNm(self.getTestFileName())
 
-        f = open(self.file, 'r')
+        f = open(self.getFileNm(), 'r')
         reader = csv.reader(f)
         return reader
-
-
-    def deleteFile(self):
-        path = pathlib.Path(self.file)
-        if(path.is_file()):
-            os.remove(self.file)
-        else:
-            print('The file does not exist')
