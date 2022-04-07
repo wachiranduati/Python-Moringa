@@ -24,7 +24,7 @@ class CsvEngine(BaseEngine):
             self.setFileNm(self.getTestFileName())
 
         
-        f = open(self.getFileNm(), 'w', newline='')
+        f = open(self.getFileNm(), 'a', newline='')
         writer = csv.writer(f)
         writer.writerow(content)
         f.close()
@@ -35,7 +35,9 @@ class CsvEngine(BaseEngine):
             self.setFileNm(self.getDataFileName())
         else:
             self.setFileNm(self.getTestFileName())
-
-        f = open(self.getFileNm(), 'r')
-        reader = csv.reader(f)
-        return reader
+        finalData = [] 
+        with open(self.getFileNm(), 'r') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                finalData.append(row)
+        return finalData

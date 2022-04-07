@@ -8,8 +8,7 @@ class TestJson(unittest.TestCase):
     test = "tests/data/dataset_test.json"
     path = pathlib.Path("tests/data/dataset_test.json")
     x =  JsonEngine(data, test)
-    data = [{"id":1,"first_name":"Yvor","last_name":"McNalley","email":"ymcnalley0@angelfire.com","gender":"Male","ip_address":"160.92.169.74"},
-    {"id":2,"first_name":"Amber","last_name":"Loudyan","email":"aloudyan1@google.com.hk","gender":"Female","ip_address":"12.206.65.11"},]
+    data = {"id":2,"first_name":"Amber","last_name":"Loudyan","email":"aloudyan1@google.com.hk","gender":"Female","ip_address":"12.206.65.11"}
 
     def setUp(self) -> None:
         self.x.createDocument(0)

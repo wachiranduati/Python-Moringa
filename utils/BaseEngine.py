@@ -43,9 +43,9 @@ class BaseEngine:
         else:
             self.__file = self.__test_filename
 
-        f = open(self.__file, 'w', newline='')
-        json.dump(content ,f)
-        f.close()
+        with open(self.__file, 'a', newline='') as f:
+            json.dump(content, f)
+        
 
     def readLines(self, choice):
         if(int(choice) == 1):
