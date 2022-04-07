@@ -1,7 +1,11 @@
+import pathlib
+import os
+import json
+
 class BaseEngine:
     __data_filename = ""
     __test_filename = ""
-    __file = ""
+    file = ""
 
     def setDataFileName(self, flnm):
         self.__data_filename = flnm
@@ -15,17 +19,11 @@ class BaseEngine:
     def getTestFileName(self):
         return self.__test_filename
 
-    def setTypeFile(self, fltype):
-        self.__file = fltype
-
-    def getTypeFile(self):
-        return self.__file
-
     def setupTestFile(self, choice):
         if(int(choice) == 1):
-            self.file = self.data_filename
+            self.file = self.__data_filename
         else:
-            self.file = self.test_filename
+            self.file = self.__test_filename
         
         self.createFile(self.file)
     
@@ -35,19 +33,19 @@ class BaseEngine:
 
     def writeRow(self, content, choice):
         if(int(choice) == 1):
-            self.file = self.data_filename
+            self.file = self.__data_filename
         else:
-            self.file = self.test_filename
+            self.file = self.__test_filename
 
         f = open(self.file, 'w', newline='')
-        writer = json.dump(content ,f)
+        json.dump(content ,f)
         f.close()
 
     def readLines(self, choice):
         if(int(choice) == 1):
-            self.file = self.data_filename
+            self.file = self.__data_filename
         else:
-            self.file = self.test_filename
+            self.file = self.__test_filename
 
         f = open(self.file, 'r')
         reader = json.load(f)
